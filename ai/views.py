@@ -17,7 +17,7 @@ def gen_boilerplate(request):
     user_input = requests.GET.get('input')
     level = requests.GET.get('level')
     tech_stack = requests.GET.get('tech_stack')
-    response = brain.write_boilerplate(user_input,level, tech_stack)
+    response = brain.write_boilerplate(user_input,level, tech_stack )
     return response
 
 
