@@ -22,6 +22,11 @@ def gen_boilerplate(request):
     data = {"response": response, "level": level, "tech_stack": tech_stack}
     return JsonResponse(data)
 
+def clear_memory(request):
+    brain.memory.clear()
+    response = {'status': 'success'}
+    return JsonResponse(response)
+
 
 
 
