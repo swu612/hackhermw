@@ -41,7 +41,7 @@ def generate_ideas(user_input: str):
     conversation.prompt = generate_ideas_prompt
     data = {}
     data['response'] = conversation.predict(input=user_input)
-    return json.dumps(data)
+    return json.loads(data)
 
 def generate_stack(input: str, level:str):
     formatted = tech_stack_advisor.format(level=level, input=input)
@@ -56,7 +56,7 @@ def generate_stack(input: str, level:str):
     conversation.prompt = formatted   
     data = {}
     data['response'] = conversation.predict(input=input)
-    return json.dumps(data)
+    return json.loads(data)
 
 def write_boilerplate(input: str, level: str, tech_stack: str):
     formatted = boilerplate_writer.format(input=input, level=level, tech_stack=tech_stack)
@@ -71,4 +71,4 @@ def write_boilerplate(input: str, level: str, tech_stack: str):
     conversation.prompt = formatted   
     data = {}
     data['response'] = conversation.predict(input=input)
-    return json.dumps(data)
+    return json.loads(data)
