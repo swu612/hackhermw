@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .import brain
-import json
-import requests
 
 def gen_ideas(request):
     user_input = request.GET.get('input')
