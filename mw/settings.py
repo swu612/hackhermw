@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g#b9tb4#%&k%bm2g6qcvv6w4$lx&o65ekeeqg=s*7f!8d9$7mp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://hackhermw-15fd05870b4b.herokuapp.com/']
+ALLOWED_HOSTS = ['https://hackhermw-15fd05870b4b.herokuapp.com/',  '127.0.0.1']
 
 # Application definition
 
@@ -53,7 +53,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'https://hackher413-7ff2f0d7cff9.herokuapp.com/'
+    'https://hackher413-7ff2f0d7cff9.herokuapp.com/',
 ]
 
 ROOT_URLCONF = 'mw.urls'

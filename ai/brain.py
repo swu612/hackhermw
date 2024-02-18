@@ -1,6 +1,6 @@
 import boto3
 import json
-from prompts import ideas_generator, tech_stack_advisor, boilerplate_writer
+from .import prompts
 from langchain.llms.bedrock import Bedrock
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
@@ -18,8 +18,9 @@ session = boto3.Session (
 	aws_session_token = aws_session_token
 )
 
-generate_ideas_prompt = PromptTemplate.from_template(ideas_generator)
-write_boilerplate_prompt = PromptTemplate.from_template(boilerplate_writer)
+generate_ideas_prompt = PromptTemplate.from_template(prompts.ideas_generator)
+tech_stack_advisor_prompt = PromptTemplate.from_template(prompts.tech_stack_advisor)
+write_boilerplate_prompt = PromptTemplate.from_template(prompts.boilerplate_writer)
 
 
 bedrock = session.client('bedrock-runtime') 
@@ -41,10 +42,10 @@ def generate_ideas(user_input: str):
     conversation.prompt = generate_ideas_prompt
     data = {}
     data['response'] = conversation.predict(input=user_input)
-    return json.loads(data)
+    return json.dumps(data)
 
 def generate_stack(input: str, level:str):
-    formatted = tech_stack_advisor.format(level=level, input=input)
+    formatted = tech_stack_advisor_prompt.format(level=level, input=input)
     # print(formatted)
     formatted = PromptTemplate.from_template(formatted)
     llm = Bedrock(
@@ -56,10 +57,11 @@ def generate_stack(input: str, level:str):
     conversation.prompt = formatted   
     data = {}
     data['response'] = conversation.predict(input=input)
-    return json.loads(data)
+    data['level'] = level
+    return json.dumps(data)
 
 def write_boilerplate(input: str, level: str, tech_stack: str):
-    formatted = boilerplate_writer.format(input=input, level=level, tech_stack=tech_stack)
+    formatted = write_boilerplate_prompt.format(input=input, level=level, tech_stack=tech_stack)
     print(formatted)
     formatted = PromptTemplate.from_template(formatted)
     llm = Bedrock(
@@ -71,4 +73,6 @@ def write_boilerplate(input: str, level: str, tech_stack: str):
     conversation.prompt = formatted   
     data = {}
     data['response'] = conversation.predict(input=input)
-    return json.loads(data)
+    data['level'] = level
+    data['tech_stack'] = tech_stack
+    return json.dumps(data)
