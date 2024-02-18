@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from brain import gen_ideas, generate_stack, write_boilerplate
+from brain import generate_ideas, generate_stack, write_boilerplate
 
 def gen_ideas(user_input: str):
-    response = gen_ideas(user_input)
+    response = generate_ideas(user_input)
     return response 
 
 def gen_stack(user_input: str, level: str):
