@@ -6,7 +6,6 @@ from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 from langchain.chains import ConversationChain
 
-
 region_name = ""  # us-east-1
 aws_access_key_id = ""  # Paste the aws access key id here
 aws_secret_access_key = ""  # Paste the aws secret access key here
